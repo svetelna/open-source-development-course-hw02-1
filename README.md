@@ -1,5 +1,5 @@
 # Simple Vector implementation in python 
-
+[![Build Status](https://travis-ci.com/svetelna/open-source-development-course-hw02-1.svg?branch=pr%2Fstep1)](https://travis-ci.com/svetelna/open-source-development-course-hw02-1)
 Very simple vector implementation supporting basic operations.
 
 ## Usage
@@ -21,6 +21,9 @@ Operations:
   - scalar * vector
   - row-vector * col-vector
   - col-vector * row-vector
+- Vector compare
+- Reversion of Vector
+- Bitwise xor of Vector with scalar `a^1`
 
 Matrix operations:
 - Addition
