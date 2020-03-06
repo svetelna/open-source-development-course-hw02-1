@@ -53,7 +53,7 @@ class Vector:
             return Vector([x + other for x in self.d])
         elif isinstance(other, Vector):
             return Vector([self.d[i] + other[i] for i in range(len(self))])
-
+    # substracting two vectors
     def __sub__(self, other):
         return list( (a-b for a,b in zip(self.d, other.d) ) )
 
