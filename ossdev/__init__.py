@@ -69,15 +69,17 @@ class Vector:
             return Vector([self.d[i] + other[i] for i in range(len(self))])
     # substracting two vectors
     def __sub__(self, other):
-        # TODO: implement vector subtraction, comment change to make conflict
-        # you may use __add__() and negation, like return (-self + other)
-        return None
+        return list( (a-b for a,b in zip(self.d, other.d) ) )
+
+    def __mul__(self, other):
+        return list( (a*other for a in self.d))
 
     def __mul__(self, other):
         if isinstance(other, int):
-            return None  # TODO: FIX
+            return list( (a*other for a in self.d))
         elif isinstance(other, Vector):
-            # TODO: add size checks
+            if len(other) != len(self):
+                raise ValueError('invalid')
             if self.is_row == other.is_row:
                 return Vector([self.d[i] * other[i] for i in range(len(self))])  # Hadamard product
             elif self.is_row:
@@ -91,15 +93,18 @@ class Vector:
             raise ValueError('Invalid operand')
 
     def __xor__(self, other):
-        # TODO: support both vector element-wise XOR and by-scalar xor (like in __add__)
-        # TODO: add size check
+        if isinstance(other, int):
+            return list( (a^other for a in self.d))
+        if len(other) != len(self):
+            raise ValueError('invalid')
         return Vector([self.d[i] ^ other[i] for i in range(len(self))])
 
     def __and__(self, other):
         if isinstance(other, int):
             return Vector([x & other for x in self.d])
         elif isinstance(other, Vector):
-            # TODO: add size check
+            if len(other) != len(self):
+                raise ValueError('invalid')
             return Vector([self.d[i] & other[i] for i in range(len(self))])
         else:
             raise ValueError('Invalid operand')
@@ -107,13 +112,10 @@ class Vector:
     def length(self):
         if len(self) == 0:
             raise ValueError('Undefined for zero-length vector')  # make return 0 instead of an exception
-        # TODO: implement vector length comp. (hint: return math.sqrt(sum(x*x for x in self.d)))
-        return None
+        return math.sqrt(sum(x*x for x in self.d))
 
     def dot(self, other):
-        # TODO: implement dot-product, i.e., a.b = \sum_i a[i]*b[i],
-        # return sum(self[i]*other[i] for i in range(len(self)))
-        return 0
+        return sum(self[i]*other[i] for i in range(len(self)))
 
     def transpose(self):
         v = Vector(self.d)
